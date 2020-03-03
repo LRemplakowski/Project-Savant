@@ -2,9 +2,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class WorldInteraction : MonoBehaviour
 {
+    private NavMeshAgent PlayerAgent { get; set; }
+
+    private void Start()
+    {
+        PlayerAgent = GetComponent<NavMeshAgent>();   
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -24,6 +32,10 @@ public class WorldInteraction : MonoBehaviour
             if (interactedObject.GetComponentInParent<Interactable>() != null) 
             {
                 Debug.Log("It works");
+            }
+            else
+            {
+                PlayerAgent.SetDestination(interactionInfo.point);
             }
         }
     }
